@@ -7,6 +7,9 @@
     var vm = this;
     var dataService = $http;
 
+    // Hook up public events
+    vm.resetSearch = resetSearch;
+
     vm.products = [];
     vm.product = {
       ProductId: 1,
@@ -23,6 +26,18 @@
 
     productList();
     searchCategoriesList();
+
+    function resetSearch() {
+        vm.searchInput = {
+            selectedCategory: {
+                CategoryId: 0,
+                CategoryName: ''
+            },
+            productName: ''
+        };
+
+        productList();
+    }
 
     function productList() {
       dataService.get("/api/Product")

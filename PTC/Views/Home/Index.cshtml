@@ -53,8 +53,9 @@
                 </select>
             </div>
             <div class="form-group">
-              @Html.LabelFor(m => m.SearchEntity.ProductName, "Product Name")
-              @Html.TextBoxFor(m => m.SearchEntity.ProductName, new { @class = "form-control" })
+                <label for="searchProductName"></label>
+                <input type="text" value="form-control" 
+                       ng-model="vm.searchInput.productName"/>
         </div>
       </div>
       <div class="panel-footer">
@@ -64,9 +65,9 @@
           <i class="glyphicon glyphicon-search"></i>
           &nbsp;Search
         </button>
-        <button formnovalidate="formnovalidate"
+        <button type="button"
                 class="btn btn-sm btn-primary"
-                data-pdsa-action="resetsearch">
+                ng-click="vm.resetSearch()">
           <i class="glyphicon glyphicon-share-alt"></i>
           &nbsp;Reset
         </button>
@@ -155,7 +156,7 @@
         </thead>
 
         <tbody>          
-            <tr ng-repeat="product in vm.products">
+            <tr ng-repeat="product in vm.products | filter: {ProductName:vm.searchInput.productName}">
               <td class="pdsa-action-button-column">
                 <a href="#" 
                    class="btn btn-default btn-sm">
